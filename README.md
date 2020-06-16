@@ -49,7 +49,8 @@ Serenity test reports can be viewed at this location once the tests are run
 
 `\target\site\serenity\index.html`
 
-##Improvements
+## Improvements
+
 1)Covert the file reading calls into screenplay tasks
 2)Better error handling method to handle all possible scenarios
 3)Integrate with cross-browser platform like Browserstack/Saucelabs
