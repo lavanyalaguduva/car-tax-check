@@ -2,7 +2,7 @@ package questions;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class ConfirmationList {
+public class CarDetailsCheckList {
     public static Target CAR_REGISTRATION_NUMBER = Target.the("car registration number")
             .locatedBy("//*[@id=\"m\"]/div/div[3]/div[1]/div/span/div[2]/dl[1]/dd");
     public static Target CAR_MAKE = Target.the("car make")

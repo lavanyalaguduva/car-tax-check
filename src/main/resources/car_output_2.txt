@@ -1,0 +1,4 @@
+REGISTRATION,MAKE,MODEL,COLOR,YEAR
+BD08KYE,Nissan,Note Tekna Auto,Orange,2008
+WV65AEO,Land Rover,Discovery Sport Se Tech Td4,Grey,2015
+SG18HTN,Volkswagen,Golf Se Navigation Tsi Evo,White,2018

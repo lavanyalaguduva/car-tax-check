@@ -1,41 +1,39 @@
 package actions;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
+import utils.GetFilePath;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReadOutputFile {
-    private static String outputFilePath;
-    private static Multimap<String, String> outputMap = ArrayListMultimap.create();
 
-    public static Multimap  read(String outputFilePath) {
-        File file = new File(getOutputFilePath(outputFilePath));
+    private static Map<String, HashMap<String, String>> outputMap = new HashMap<String, HashMap<String, String>>();
+
+    public static Map<String, HashMap<String, String>> read(String outputFilePath) {
+        File file = new File(GetFilePath.get(outputFilePath));
         try (Scanner sc = new Scanner(file, StandardCharsets.UTF_8.name())) {
+            String[] headers = new String[10];
+            if (sc.hasNextLine()) {
+                headers = sc.nextLine().split(",");
+            }
             while (sc.hasNextLine()) {
-                String[] lineList = sc.nextLine().split(",");
-                String key = lineList[0];
-                for (int i = 1; i < lineList.length; i++) {
-                    outputMap.put(key, lineList[i]);
+                String[] values = sc.nextLine().split(",");
+                String key = values[0];
+                HashMap<String, String> innerMap = new HashMap<String, String>();
+                for (int i = 1; i < values.length; i++) {
+                    innerMap.put(headers[i].toLowerCase(), values[i]);
                 }
+                outputMap.put(key, innerMap);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-       return outputMap;
+        return outputMap;
+
     }
 
-    static String getOutputFilePath(String outputFilePath) {
-        EnvironmentVariables variables = SystemEnvironmentVariables.createEnvironmentVariables();
-        outputFilePath = EnvironmentSpecificConfiguration.from(variables)
-                .getProperty(outputFilePath);
-        System.out.println("outputFilePath " + outputFilePath);
-        return outputFilePath;
-    }
 }

@@ -6,7 +6,7 @@ import net.serenitybdd.screenplay.actions.Open;
 
 public class NavigateTo {
     public static Performable theCarTaxCheckPage() {
-        return Task.where("{0} opens the home page",
+        return Task.where("{0} goes to the car tax check page",
                 Open.browserOn().the(CarTaxHomePage.class));
     }
 }
